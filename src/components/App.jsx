@@ -5,7 +5,8 @@ class App extends React.Component {
 
     this.state = {
       videoList: props.videos,
-      currentVideo: props.videos[0]
+      currentVideo: props.videos[0],
+      autoplay: true
     };
   }
 
@@ -28,6 +29,22 @@ class App extends React.Component {
     searchYouTube(options, this.onRequest.bind(this));
   }
 
+  onAutoplayToggle() {
+    console.log('Autoplay toggled');
+    this.state.autoplay = !this.state.autoplay;
+    if (!this.state.autoplay) {
+      $('.autoplay').css({
+        'background-color': 'rgba(132, 153, 166, 1.0)',
+        'border': 'rgba(132, 153, 166, 1.0) 1px solid'
+      });
+    } else {
+      $('.autoplay').css({
+        'background-color': 'rgba(0, 96, 169, 1.0)',
+        'border': 'rgba(0, 96, 169, 1.0) 1px solid'
+      });
+    }
+  }
+
   onListItemClick(videoId) {
     console.log(videoId);
     for (var i = 0; i < this.state.videoList.length; i++) {
@@ -44,9 +61,9 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Nav submitCallback={this.onSearch.bind(this)} />
+        <Nav submitCallback={this.onSearch.bind(this)} autoplayToggle={ () => this.onAutoplayToggle() } />
         <div className="col-md-7">
-          <VideoPlayer video={this.state.currentVideo} />
+          <VideoPlayer video={this.state.currentVideo} autoplay={this.state.autoplay} />
         </div>
         <div className="col-md-5">
           <VideoList videos={this.state.videoList} titleClick={ (videoId) => this.onListItemClick(videoId) } />

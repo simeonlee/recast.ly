@@ -3,6 +3,7 @@ var Nav = (props) => (
     <div className="col-md-6 col-md-offset-3">
       <Search submitCallback={ props.submitCallback } />
     </div>
+    <button className="btn btn-primary autoplay" onClick={ props.autoplayToggle }>Autoplay</button>
   </nav>
 );
 

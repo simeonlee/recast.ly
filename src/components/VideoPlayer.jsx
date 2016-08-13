@@ -1,5 +1,9 @@
 var VideoPlayer = (props) => {
-  var source = "https://www.youtube.com/embed/" + props.video.id.videoId;
+  var source = 'https://www.youtube.com/embed/' + props.video.id.videoId;
+  var autoplay = '?autoplay=1';
+  if (props.autoplay) {
+    source = source + autoplay;
+  }
 
   return (
     <div className="video-player">
