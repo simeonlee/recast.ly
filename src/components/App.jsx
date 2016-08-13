@@ -10,7 +10,6 @@ class App extends React.Component {
   }
 
   onRequest(data) {
-    console.log(data);
     this.setState({
       videoList: data.items
     });
@@ -30,11 +29,12 @@ class App extends React.Component {
   }
 
   onListItemClick(videoId) {
-    for (var i = 0; i < this.props.videos.length; i++) {
-      var id = this.props.videos[i].id.videoId;
+    console.log(videoId);
+    for (var i = 0; i < this.state.videoList.length; i++) {
+      var id = this.state.videoList[i].id.videoId;
       if (id === videoId) {
         this.setState({
-          currentVideo: this.props.videos[i]
+          currentVideo: this.state.videoList[i]
         });
         break;
       }
