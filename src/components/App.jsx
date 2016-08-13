@@ -9,8 +9,27 @@ class App extends React.Component {
     };
   }
 
+  onRequest(data) {
+    console.log(data);
+    this.setState({
+      videoList: data.items
+    });
+  }
+
+  onSearch(stringQuery) {
+    var options = {
+      part: 'snippet',
+      q: stringQuery,
+      type: 'video',
+      maxResults: 10,
+      key: YOUTUBE_API_KEY,
+      videoEmbeddable: true
+    };
+
+    searchYouTube(options, this.onRequest.bind(this));
+  }
+
   onListItemClick(videoId) {
-    console.log('CLICKED!');
     for (var i = 0; i < this.props.videos.length; i++) {
       var id = this.props.videos[i].id.videoId;
       if (id === videoId) {
@@ -25,7 +44,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Nav />
+        <Nav submitCallback={this.onSearch.bind(this)} />
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo} />
         </div>
