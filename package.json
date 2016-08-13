@@ -6,8 +6,11 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
+    "dev": "npm run test | npm run app | npm run transpile",
     "test": "live-server --open=./SpecRunner.html --port=8081",
-    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash"
+    "app": "live-server --open=./index.html --port=8080",
+    "postinstall": "curl -s https://raw.githubusercontent.com/hackreactor-labs/pomander/master/bin/install | bash",
+    "transpile": "babel . -w --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.2",
